@@ -91,6 +91,7 @@ StoreModule.forFeature("login", loginReducer)]
   })
 
   it('should hide loading and show success message when has recovered password', () => {
-    expect(true).toBeTruthy();
+    //start page
+    //
   })
 });

@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { Store, StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppState } from 'src/store/AppState';
 import { loadingReducer } from 'src/store/loading/loading.reducers';
-import { recoverPassword } from 'src/store/login/login.actions';
+import { recoverPassword, recoverPasswordSuccess } from 'src/store/login/login.actions';
 import { loginReducer } from 'src/store/login/login.reducers';
 
 import { LoginPage } from './login.page';
@@ -17,6 +17,7 @@ describe('LoginPage', () => {
   let router: Router;
   let store: Store<AppState>;
   let page;
+  let toastController: ToastController;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -33,6 +34,7 @@ StoreModule.forFeature("login", loginReducer)]
     fixture = TestBed.createComponent(LoginPage);
     router = TestBed.inject(Router);
     store = TestBed.inject(Store);
+    toastController = TestBed.inject(ToastController);
 
 
     component = fixture.componentInstance;
@@ -91,7 +93,18 @@ StoreModule.forFeature("login", loginReducer)]
   })
 
   it('should hide loading and show success message when has recovered password', () => {
+    spyOn(toastController, 'create');
     //start page
-    //
+    fixture.detectChanges();
+    //set login state as recovering password
+    store.dispatch(recoverPassword())
+    //set loginState as recovered password
+    store.dispatch(recoverPasswordSuccess())
+    //verify loadingState.show == false. Subscribe to it to get access to the loading state
+    store.select('loading').subscribe(loadingState => {
+      expect(loadingState.show).toBeFalsy()
+    })
+    //verify message was shown
+    expect(toastController.create).toHaveBeenCalledTimes(1);
   })
 });

@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AppState } from 'src/store/AppState';
 import { hide, show } from 'src/store/loading/loading.action';
-import { login, loginSuccess, recoverPassword, recoverPasswordFail, recoverPasswordSuccess } from 'src/store/login/login.actions';
+import { login, loginFail, loginSuccess, recoverPassword, recoverPasswordFail, recoverPasswordSuccess } from 'src/store/login/login.actions';
 import { LoginState } from 'src/store/login/LoginState';
 import { LoginPageForm } from './login.page.form';
 
@@ -30,9 +30,10 @@ export class LoginPage implements OnInit, OnDestroy {
     this.loginStateSubscription = this.store.select('login').subscribe(loginState => {
      this.onIsRecoveringPassword(loginState)
      this.onIsRecoveredPassword(loginState)
-     this.onIsRecoverPasswordFail(loginState)
+     this.onError(loginState)
 
      this.onIsLoggingIn(loginState)
+     this.onIsLoggedIn(loginState)
 
      this.toggleLoading(loginState)
     })
@@ -59,12 +60,16 @@ export class LoginPage implements OnInit, OnDestroy {
       const password = this.form.get('password').value
       this.authService.login(email,password).subscribe(user => {
         this.store.dispatch(loginSuccess({user}))
+      }, error => {
+        this.store.dispatch(loginFail({error}))
       })
     }
   }
 
   private onIsLoggedIn(loginState: LoginState){
-    
+    if(loginState.isLoggedIn){
+      this.router.navigate(['home'])
+    }
   }
 
   private onIsRecoveringPassword(loginState: LoginState){
@@ -89,7 +94,7 @@ export class LoginPage implements OnInit, OnDestroy {
     }
   }
 
-  private async onIsRecoverPasswordFail(loginState: LoginState){
+  private async onError(loginState: LoginState){
     if(loginState.error){
       const toaster = await this.toastController.create({
         position : "bottom",

@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { Store, StoreModule } from '@ngrx/store';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { User } from 'src/app/model/user/User';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -107,7 +107,7 @@ StoreModule.forFeature("login", loginReducer)]
   })
 
   it('should hide loading and show error message when error on recover password', () => {
-    spyOn(toastController, 'create');
+    spyOn(toastController, 'create').and.returnValue(<any> Promise.resolve({present: () => {}}));
     //start page
     fixture.detectChanges();
     //recover password
@@ -164,5 +164,25 @@ StoreModule.forFeature("login", loginReducer)]
     })
     //expect home page showing
     expect(router.navigate).toHaveBeenCalledWith(['home'])
+  })
+
+  it('should hide loading and show error when user cant login', () => {
+    spyOn(authService, 'login').and.returnValue(throwError({message: 'error'}))//simulates calling of the backend
+    spyOn(toastController, 'create').and.returnValue(<any> Promise.resolve({present: () => {}}));
+
+    //start page
+    fixture.detectChanges()
+    //set error e mail
+    component.form.get('email').setValue('error@email.com')
+    //set password
+    component.form.get('password').setValue('anyPassword')
+    //click on login button
+    page.querySelector('#loginButton').click()
+    //expect loading is hidden
+    store.select('loading').subscribe(loadingState => {
+    expect(loadingState.show).toBeFalsy();
+  })
+  //expect error message was shown
+  expect(toastController.create).toHaveBeenCalledTimes(1);
   })
 });

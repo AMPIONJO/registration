@@ -9,12 +9,15 @@
 
 <ion-content>
   <ion-list>
-    <ion-item color = "primary">
+    <ion-item *ngFor="let item of logins" color = "color-primary-contrast">
       <ion-avatar slot = "start">
         <img src="assets/img/avatar.jpg" alt="avatar">
       </ion-avatar>
       <ion-label>
-        <h1>Joel Mongare</h1>
+        <h1>{{item.userName}}</h1>
+        <p>Expected Salary: <span class = "money">Ksh. 22,000</span></p>
+        <p>Expected Salary: <span class = "money">Ksh. 22,000</span></p>
+        <p>Expected Salary: <span class = "money">Ksh. 22,000</span></p>
         <p>Expected Salary: <span class = "money">Ksh. 22,000</span></p>
       </ion-label>
     </ion-item>

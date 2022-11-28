@@ -24,13 +24,13 @@ export class AuthService {
   login(email: string, password: string): Observable<User>{
     return new Observable<User>(observer => {
       setTimeout(() => {
-        if(email == "error@email.com"){
+        if(email == null){
           observer.error({message: 'User not found'})
           observer.next();
         }else{
           const user = new User();
           user.email = email;
-          user.id = "userId";
+          user.password = password;
           observer.next(user)
         }
         observer.complete()

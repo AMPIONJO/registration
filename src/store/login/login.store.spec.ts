@@ -63,7 +63,7 @@ describe ("Login store", ()=>{
         isLoggingIn: true};
 
         const user = new User();
-        user.id = "anyId";
+        user.id = 3;
         const newState = loginReducer(initialState, loginSuccess({user}));
         expect(newState).toEqual({
             ...initialState,

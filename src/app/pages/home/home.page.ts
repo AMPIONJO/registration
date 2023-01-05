@@ -9,9 +9,22 @@ import { ApiResult, LoginService } from 'src/app/services/login/login.service';
 })
 export class HomePage implements OnInit {
 
-  logins : ApiResult
+  logins : any
+  public toggled: boolean = false;
+  searchTerm: String = '';
+  public items: any;
 
-  constructor(private loginService: LoginService, private loadingCtrl: LoadingController) { }
+  constructor(private loginService: LoginService, private loadingCtrl: LoadingController) {
+    this.toggled = false;
+   }
+
+   public toggle(): void {
+    this.toggled = !this.toggled;
+ }
+
+ initializeItems() {
+  this.items = this.logins;
+}
 
   ngOnInit() {
     this.loadLoginDetails()
@@ -28,10 +41,23 @@ export class HomePage implements OnInit {
       console.log(res)
       this.logins = res
       console.log(res)
+      this.initializeItems()
 
       event?.target.complete()
     })
   }
 
-
+  searchThis( ev: any ) {
+    // Reset items back to all of the items
+    this.initializeItems();
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        return (item.userName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }  
+  }
+  
 }

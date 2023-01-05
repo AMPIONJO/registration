@@ -109,6 +109,7 @@ export class LoginPage implements OnInit, OnDestroy {
     this.store.dispatch(recoverPassword());
   }
 
+  //for the login button, it initiates the login function at the store
   login(){
     this.store.dispatch(login())
   }

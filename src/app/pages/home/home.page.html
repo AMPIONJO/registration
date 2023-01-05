@@ -5,7 +5,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="primary">
-      <ion-button ion-button icon-only (click)="toggle()" *ngIf="!toggled">
+      <ion-button icon-only (click)="toggle()" *ngIf="!toggled">
         <ion-icon name="search"></ion-icon>
       </ion-button>
       <ion-button>
@@ -14,7 +14,7 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color = "primary" *ngIf="toggled">
-    <ion-searchbar
+    <ion-searchbar #mySearchbar
     [(ngModel)]="searchTerm"
     (ionInput)="searchThis($event)"
     (ionCancel)="toggle()"

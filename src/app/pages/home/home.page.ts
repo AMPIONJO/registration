@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
 import { ApiResult, LoginService } from 'src/app/services/login/login.service';
+import {ViewChild} from '@angular/core';
+import {IonSearchbar} from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -13,12 +15,15 @@ export class HomePage implements OnInit {
   public toggled: boolean = false;
   searchTerm: String = '';
   public items: any;
+  @ViewChild('mySearchbar', {static: false}) searchbar: IonSearchbar;
 
   constructor(private loginService: LoginService, private loadingCtrl: LoadingController) {
     this.toggled = false;
    }
 
-   public toggle(): void {
+  public toggle(): void {
+    this.searchTerm = ''
+    this.initializeItems()
     this.toggled = !this.toggled;
  }
 

@@ -29,15 +29,21 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of items">
-      <ion-avatar slot = "start">
+      <!-- <ion-avatar slot = "start">
         <img src="assets/img/avatar.jpg" alt="avatar">
-      </ion-avatar>
+      </ion-avatar> -->
+      <ion-thumbnail slot="start">
+        <img alt="Image View" src="assets/img/avatar.jpg" />
+      </ion-thumbnail>
       <ion-label>
-        <h1>{{item.userName}}</h1>
-        <p>Expected Salary: <span class = "money">Ksh. 22,000</span></p>
-        <p>Expected Salary: <span class = "money">Ksh. 22,000</span></p>
-        <p>Expected Salary: <span class = "money">Ksh. 22,000</span></p>
-        <p>Expected Salary: <span class = "money">Ksh. 22,000</span></p>
+        <h1>{{item.userName}}, 28</h1>
+        <p>Location: Nairobi <!-- {{item.location}}--></p>
+        <p>Experience: 2 <!-- {{item.experience}}--> years</p>
+        <p>Bureau: Shalom <!-- {{item.bureau}}--></p>
+        <ion-button span class="right">View Profile</ion-button>
+      <br>
+        <h1><b>KSH. 8000 <!-- {{item.salary}}--></b></h1>
+        <h1>/ month</h1>
       </ion-label>
     </ion-item>
   </ion-list>

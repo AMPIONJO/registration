@@ -15,3 +15,17 @@ ion-item{
 ion-list{
     background: var(--ion-color-primary); 
 }
+
+ion-thumbnail {
+  --size: 140px;
+  --border-radius: 14px;
+}
+
+ion-button {
+    height: 40px;
+    --border-radius: 14px;
+  }
+
+  .right {
+    float: right;
+  }

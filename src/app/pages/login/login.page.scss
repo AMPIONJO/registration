@@ -4,8 +4,12 @@ ion-card-header.ios {
     flex-flow: column-reverse;
   }
 ion-button[color = "dark"]{
-    text-transform : initial
+    text-transform : initial;
 }
 ion-content{
     --background: var(--ion-color-primary);
 }
+
+.custom {
+    width: 80%;
+  }

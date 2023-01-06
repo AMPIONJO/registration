@@ -20,8 +20,12 @@
       </ion-item>
       <app-error-message [field] = "form.get('password')" error = "required" message = "Password is required"></app-error-message>
       <ion-button fill="clear" color = "dark" size = "full" [disabled] = "!form.get('email').valid" (click) = "forgotEmailPassword()" id="recoverPasswordButton">Forgot email/password</ion-button>
-      <ion-button color = "primary" size = "full" [disabled] = "!form.valid" (click) = "login()" id="loginButton">Login</ion-button>
-      <ion-button color = "primary" size = "full" fill = "clear" (click) = "register()">Register</ion-button>
+      <div style="display: flex; justify-content: center;">
+      <ion-button span class="custom" color = "primary" size = "default" [disabled] = "!form.valid" (click) = "login()" id="loginButton">Login</ion-button>
+      </div>
+      <div style="display: flex; justify-content: center;">
+      <ion-button span class="custom" color = "primary" size = "default" fill = "clear" (click) = "register()">Register</ion-button>
+      </div>
     </ion-card-content>
   </ion-card>
 </form>

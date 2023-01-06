@@ -1,17 +1,47 @@
+<body>
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+    <ion-menu side="start" contentId="main-content" type="overlay">
+      <ion-header>
+        <ion-toolbar translucent color = "primary">
+          <div></div>
+          <p span class="marginal">Your Online Househelp Agency</p>
+        </ion-toolbar>
+      </ion-header>
       <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>Shalom</ion-list-header>
-          <ion-note>Your Online Househelp Agency</ion-note>
-
+        <!-- <ion-list id="inbox-list">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+        </ion-list> -->
+        <ion-list>
+          <ion-item button="true">
+            <ion-icon name="mail" slot="start"></ion-icon>
+            <ion-label>Inbox</ion-label>
+          </ion-item>
+          <ion-item button="true">
+            <ion-icon name="paper-plane" slot="start"></ion-icon>
+            <ion-label>Outbox</ion-label>
+          </ion-item>
+          <ion-item button="true">
+            <ion-icon name="heart" slot="start"></ion-icon>
+            <ion-label>Favorites</ion-label>
+          </ion-item>
+          <ion-item button="true">
+            <ion-icon name="archive" slot="start"></ion-icon>
+            <ion-label>Archived</ion-label>
+          </ion-item>
+          <ion-item button="true">
+            <ion-icon name="trash" slot="start"></ion-icon>
+            <ion-label>Trash</ion-label>
+          </ion-item>
+          <ion-item button="true">
+            <ion-icon name="warning" slot="start"></ion-icon>
+            <ion-label>Spam</ion-label>
+          </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>
@@ -19,3 +49,4 @@
   </ion-split-pane>
   <app-loading></app-loading>
 </ion-app>
+</body>

@@ -49,6 +49,9 @@
       <!-- <ion-avatar slot = "start">
         <img src="assets/img/avatar.jpg" alt="avatar">
       </ion-avatar> -->
+      <div *ngIf= "item.items?.length === 0">
+        <h1> Items To Display</h1>
+      </div>
       <ion-thumbnail slot="start">
         <img alt="Image View" src="assets/img/avatar.jpg" />
       </ion-thumbnail>

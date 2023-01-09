@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
   public dropped: boolean = false;
   searchTerm: String = '';
   public items: any;
+  public filteredItems: [];
   @ViewChild('mySearchbar', {static: false}) searchbar: IonSearchbar;
 
   constructor(private loginService: LoginService, private loadingCtrl: LoadingController) {
@@ -64,10 +65,18 @@ export class HomePage implements OnInit {
     let val = ev.target.value;
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
+      console.log(this.items)
+      this.filteredItems = this.items.filter((item) => {
         return (item.userName.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
-    }  
+      console.log(this.filteredItems.length)
+      if(this.filteredItems.length==0){
+       //add display in the case nothing has been found from the search
+      }
+      else{
+        this.items=this.filteredItems
+      }
+    } 
   }
   
 }

@@ -13,6 +13,7 @@ export class HomePage implements OnInit {
 
   logins : any
   public toggled: boolean = false;
+  public dropped: boolean = false;
   searchTerm: String = '';
   public items: any;
   @ViewChild('mySearchbar', {static: false}) searchbar: IonSearchbar;
@@ -26,6 +27,10 @@ export class HomePage implements OnInit {
     this.initializeItems()
     this.toggled = !this.toggled;
  }
+
+ public drop(): void {
+  this.dropped = !this.dropped;
+}
 
  initializeItems() {
   this.items = this.logins;

@@ -8,7 +8,7 @@
       <ion-button icon-only (click)="toggle()" *ngIf="!toggled">
         <ion-icon name="search"></ion-icon>
       </ion-button>
-      <ion-button>
+      <ion-button icon-only (click)="drop()" *ngIf="!dropped">
         <ion-icon slot="icon-only" name="filter"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -20,6 +20,23 @@
     (ionCancel)="toggle()"
     [showCancelButton]="true">
  </ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="dropped">
+    <ion-range [dualKnobs]="true" [value]="{ lower: 18, upper: 50 }" name="Age" min = "18" max = "50" pin = "true">
+      <ion-label slot = "start"><h2>Age</h2></ion-label>
+      <ion-label slot = "end"><h2>yrs</h2></ion-label>
+    </ion-range>
+    <ion-range [dualKnobs]="true" [value]="{ lower: 0, upper: 25 }" name="Experience" min = "0" max = "25" pin = "true">
+      <ion-label slot = "start"><h2>Experience</h2></ion-label>
+      <ion-label slot = "end"><h2>yrs</h2></ion-label>
+    </ion-range>
+    <ion-range [dualKnobs]="true" [value]="{ lower: 5000, upper: 20000 }" name="Experience" min = "5000" max = "20000" pin = "true">
+      <ion-label slot = "start"><h2>Salary</h2></ion-label>
+      <ion-label slot = "end"><h2>Ksh</h2></ion-label>
+    </ion-range>
+    <ion-input placeholder="Input Filter Location" type="text"></ion-input>
+    <ion-button (click) = "drop()" size = "small">Filter</ion-button>
+    <ion-button (click) = "drop()" span class="right" size = "small">Cancel</ion-button>
   </ion-toolbar>
    <!--<ion-toolbar color = "primary">
     <ion-searchbar placeholder = 'John Doe' [(ngModel)] = "searchTerm" showCancelButton = "focus" animated></ion-searchbar>
